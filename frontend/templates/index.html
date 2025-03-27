@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CS 203 - Assignment 8</title>
+</head>
+<body>
+    <h2>Elasticsearch Interface</h2>
+    <h2> Shah Harshil Hardik - 23110132 </h2>
+    <h2> Shah Tirth - 23110295 </h2>
+    <form id="insert", method="get">
+        <textarea id="insert_txt"></textarea>
+        <br><input type="submit" value="Insert">
+    </form>
+    <form id="query", method="get">
+	<input type="text" id="query_txt">
+	<input type="submit" value="Query">
+    </form>
+    <h2> Output: </h2>
+    <div id="output"></div>
+
+    <script>
+        document.getElementById("insert").onsubmit = async function(event) {
+            event.preventDefault();
+            let doc = document.getElementById("insert_txt").value;
+            let response = await fetch("/insert/"+doc);
+            let result = await response.json();
+            document.getElementById("output").innerText = JSON.stringify(result, null, 2);
+        };
+
+        document.getElementById("query").onsubmit = async function(event) {
+            event.preventDefault();
+            let doc = document.getElementById("query_txt").value;
+            let response = await fetch("/get/"+doc);
+            let result = await response.json();
+            document.getElementById("output").innerText = JSON.stringify(result, null, 2);
+        };
+    </script>
+</body>
+</html>
